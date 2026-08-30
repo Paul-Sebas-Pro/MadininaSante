@@ -1,0 +1,68 @@
+{
+  "name": "Madinina Santé - Votre santé en Martinique",
+  "short_name": "Madinina Santé",
+  "description": "Trouvez facilement des professionnels de santé, pharmacies de garde et services médicaux en Martinique",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0077B6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr",
+  "categories": ["health", "medical", "lifestyle"],
+  "icons": [
+    {
+      "src": "/logo_madinina_sante.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo_madinina_sante.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-mobile.png", 
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pharmacies de garde",
+      "short_name": "Pharmacies",
+      "description": "Trouver une pharmacie de garde",
+      "url": "/#pharmacies-garde",
+      "icons": [
+        {
+          "src": "/logo_madinina_sante.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Urgences",
+      "short_name": "Urgences", 
+      "description": "Numéros d'urgence",
+      "url": "/#urgences",
+      "icons": [
+        {
+          "src": "/logo_madinina_sante.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
+
