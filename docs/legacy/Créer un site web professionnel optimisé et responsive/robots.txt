@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://madinina-sante.fr/sitemap.xml
+
+# Optimisation pour les moteurs de recherche
+Crawl-delay: 1
+
+# Interdire l'accès aux fichiers sensibles
+Disallow: /api/
+Disallow: /.env
+Disallow: /admin/
+Disallow: /private/
+
+# Permettre l'accès aux ressources importantes
+Allow: /assets/
+Allow: /images/
+Allow: /*.css
+Allow: /*.js
+

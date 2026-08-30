@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/*
+  Madinina Santé — design tokens (charte graphique)
+  Réf. docs/legacy/Plan de Développement.../identite_visuelle.md
+*/
+@theme {
+  --color-caraibes: #0077b6;
+  --color-caraibes-dark: #005f92;
+  --color-tropical: #2ecc71;
+  --color-tropical-dark: #27ae60;
+  --color-soleil: #ffd700;
+  --color-anthracite: #34495e;
+  --color-anthracite-soft: #5b6b7c;
+
+  --color-urgence: #d7263d;
+  --color-garde: #d7263d;
+
+  --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #34495e;
+  --surface: #f4f7f9;
+  --border: #e2e8ee;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f1720;
+    --foreground: #e6edf3;
+    --surface: #17212b;
+    --border: #26313d;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}

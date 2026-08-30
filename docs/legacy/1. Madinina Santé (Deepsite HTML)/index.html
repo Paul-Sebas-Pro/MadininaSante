@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madinina Santé - Votre portail santé en Martinique</title>
+    <meta name="description" content="Madinina Santé centralise tous les services de santé en Martinique : médecins, pharmacies de garde, urgences et conseils santé pour habitants et visiteurs.">
+    <meta name="keywords" content="Martinique, santé, médecins, pharmacies de garde, urgences, conseils santé, Madinina">
+    <meta name="author" content="Madinina Santé">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Madinina Santé - Votre portail santé en Martinique">
+    <meta property="og:description" content="Centralise tous les services de santé en Martinique : médecins, pharmacies de garde, urgences et conseils santé.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.madininasante.mq">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=1">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Madinina Santé - Votre portail santé en Martinique">
+    <meta name="twitter:description" content="Centralise tous les services de santé en Martinique.">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=1">
+    
+    <!-- Schema.org markup for HealthAndBeautyBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HealthAndBeautyBusiness",
+      "name": "Madinina Santé",
+      "description": "Portail santé pour la Martinique - Médecins, pharmacies de garde, urgences et conseils santé",
+      "url": "https://www.madininasante.mq",
+      "telephone": "+596-596-123456",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Fort-de-France",
+        "addressCountry": "Martinique"
+      },
+      "openingHours": "24/7",
+      "sameAs": [
+        "https://www.facebook.com/madininasante",
+        "https://www.twitter.com/madininasante"
+      ]
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&family=Roboto:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bleu-caraibes': '#0077B6',
+                        'vert-tropical': '#2ECC71',
+                        'jaune-soleil': '#FFD700',
+                        'blanc-pur': '#FFFFFF',
+                        'gris-anthracite': '#34495E',
+                    },
+                    fontFamily: {
+                        'heading': ['Montserrat', 'Open Sans', 'sans-serif'],
+                        'body': ['Roboto', 'Lato', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .transition-smooth {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="font-body text-gris-anthracite bg-white">
+    <!-- Header avec navigation sticky -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center py-4">
+                <a href="#" class="flex items-center">
+                    <span class="text-2xl font-bold text-bleu-caraibes font-heading">Madinina Santé</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Accueil</a>
+                    <a href="#annuaire" class="text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Annuaire</a>
+                    <a href="#pharmacies" class="text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Pharmacies</a>
+                    <a href="#urgences" class="text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Urgences</a>
+                    <a href="#conseils" class="text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Conseils</a>
+                    <a href="#about" class="text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">À propos</a>
+                    <a href="#contact" class="text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Contact</a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gris-anthracite focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-4 space-y-4">
+                <a href="#" class="block text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Accueil</a>
+                <a href="#annuaire" class="block text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Annuaire</a>
+                <a href="#pharmacies" class="block text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Pharmacies</a>
+                <a href="#urgences" class="block text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Urgences</a>
+                <a href="#conseils" class="block text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Conseils</a>
+                <a href="#about" class="block text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">À propos</a>
+                <a href="#contact" class="block text-gris-anthracite hover:text-bleu-caraibes transition-smooth font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative py-20 bg-gradient-to-r from-bleu-caraibes to-vert-tropical text-white">
+            <div class="absolute inset-0 opacity-20">
+                <img src="https://picsum.photos/1920/1080?random=2" alt="Paysage martiniquais" class="w-full h-full object-cover parallax" loading="lazy">
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-3xl mx-auto text-center animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold font-heading mb-6">Votre santé en Martinique, simplifiée</h1>
+                    <p class="text-xl mb-8">Trouvez rapidement médecins, pharmacies de garde et numéros d'urgence en Martinique</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="#annuaire" class="bg-jaune-soleil text-gris-anthracite px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-smooth shadow-lg">Rechercher un professionnel</a>
+                        <a href="#urgences" class="bg-white text-bleu-caraibes px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-smooth shadow-lg">Urgences</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Madinina Santé, votre partenaire santé</h2>
+                    <p class="text-xl text-gris-anthracite max-w-3xl mx-auto">Notre mission : faciliter l'accès aux soins pour tous en Martinique</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="animate-slide-up">
+                        <img src="https://picsum.photos/600/400?random=3" alt="Équipe Madinina Santé" class="rounded-lg shadow-xl w-full" loading="lazy">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold font-heading text-vert-tropical mb-4">Une initiative au service des Martiniquais</h3>
+                        <p class="mb-4">Madinina Santé est née d'un constat simple : il est souvent difficile de trouver rapidement un professionnel de santé, surtout en dehors des heures ouvrables ou dans une zone géographique unfamiliar.</p>
+                        <p class="mb-6">Notre plateforme centralise toutes les informations essentielles pour vous orienter vers les bons interlocuteurs, au bon moment.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center">
+                                <div class="bg-bleu-caraibes rounded-full p-2 mr-2">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                                <span>Plus de 500 professionnels référencés</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="bg-vert-tropical rounded-full p-2 mr-2">
+                                    <i class="fas fa-clock text-white"></i>
+                                </div>
+                                <span>Disponible 24h/24 et 7j/7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Nos services</h2>
+                    <p class="text-xl text-gris-anthracite">Tous les outils pour votre santé au quotidien</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-smooth text-center">
+                        <div class="bg-bleu-caraibes rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-stethoscope text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-heading font-semibold mb-2">Annuaire santé</h3>
+                        <p class="text-gris-anthracite">Trouvez facilement médecins, spécialistes et centres de santé près de chez vous</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-smooth text-center">
+                        <div class="bg-vert-tropical rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-pills text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-heading font-semibold mb-2">Pharmacies de garde</h3>
+                        <p class="text-gris-anthracite">Consultez en temps réel les pharmacies ouvertes près de vous, même la nuit et le week-end</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-smooth text-center">
+                        <div class="bg-jaune-soleil rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-ambulance text-gris-anthracite text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-heading font-semibold mb-2">Urgences</h3>
+                        <p class="text-gris-anthracite">Accédez rapidement aux numéros d'urgence et centres hospitaliers</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-smooth text-center">
+                        <div class="bg-gris-anthracite rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heartbeat text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-heading font-semibold mb-2">Conseils santé</h3>
+                        <p class="text-gris-anthracite">Des informations pratiques pour préserver votre santé sous les tropiques</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Annuaire Section -->
+        <section id="annuaire" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Annuaire des professionnels</h2>
+                    <p class="text-xl text-gris-anthracite">Trouvez le professionnel de santé dont vous avez besoin</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="md:col-span-3">
+                            <input type="text" placeholder="Rechercher un médecin, une spécialité, une ville..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bleu-caraibes">
+                        </div>
+                        <div>
+                            <button class="w-full bg-bleu-caraibes text-white px-4 py-3 rounded-lg hover:bg-opacity-90 transition-smooth">Rechercher</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <select class="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bleu-caraibes">
+                            <option>Toutes spécialités</option>
+                            <option>Médecin généraliste</option>
+                            <option>Dentiste</option>
+                            <option>Pédiatre</option>
+                            <option>Dermatologue</option>
+                        </select>
+                        
+                        <select class="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bleu-caraibes">
+                            <option>Toutes les villes</option>
+                            <option>Fort-de-France</option>
+                            <option>Le Lamentin</option>
+                            <option>Schœlcher</option>
+                            <option>Ducos</option>
+                        </select>
+                        
+                        <select class="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bleu-caraibes">
+                            <option>Distance</option>
+                            <option>Moins de 5 km</option>
+                            <option>Moins de 10 km</option>
+                            <option>Moins de 20 km</option>
+                        </select>
+                        
+                        <select class="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bleu-caraibes">
+                            <option>Disponibilité</option>
+                            <option>Ouvert maintenant</option>
+                            <option>Aujourd'hui</option>
+                            <option>Cette semaine</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-smooth">
+                        <img src="https://picsum.photos/400/300?random=4" alt="Docteur Marie Lise" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-heading font-semibold mb-2">Dr. Marie Lise</h3>
+                            <p class="text-vert-tropical font-medium mb-2">Médecin généraliste</p>
+                            <p class="text-gris-anthracite mb-4"><i class="fas fa-map-marker-alt text-bleu-caraibes mr-2"></i> 12 Rue de la Liberté, Fort-de-France</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-bleu-caraibes hover:underline">Voir le profil</a>
+                                <button class="bg-bleu-caraibes text-white px-4 py-2 rounded-lg text-sm hover:bg-opacity-90 transition-smooth">Prendre RDV</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-smooth">
+                        <img src="https://picsum.photos/400/300?random=5" alt="Docteur Pierre Henri" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-heading font-semibold mb-2">Dr. Pierre Henri</h3>
+                            <p class="text-vert-tropical font-medium mb-2">Dentiste</p>
+                            <p class="text-gris-anthracite mb-4"><i class="fas fa-map-marker-alt text-bleu-caraibes mr-2"></i> 45 Avenue des Caraïbes, Le Lamentin</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-bleu-caraibes hover:underline">Voir le profil</a>
+                                <button class="bg-bleu-caraibes text-white px-4 py-2 rounded-lg text-sm hover:bg-opacity-90 transition-smooth">Prendre RDV</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-smooth">
+                        <img src="https://picsum.photos/400/300?random=6" alt="Docteur Sophie Antilles" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-heading font-semibold mb-2">Dr. Sophie Antilles</h3>
+                            <p class="text-vert-tropical font-medium mb-2">Pédiatre</p>
+                            <p class="text-gris-anthracite mb-4"><i class="fas fa-map-marker-alt text-bleu-caraibes mr-2"></i> 78 Boulevard Général de Gaulle, Schœlcher</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-bleu-caraibes hover:underline">Voir le profil</a>
+                                <button class="bg-bleu-caraibes text-white px-4 py-2 rounded-lg text-sm hover:bg-opacity-90 transition-smooth">Prendre RDV</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <a href="#" class="inline-block bg-vert-tropical text-white px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-smooth">Voir tous les professionnels</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pharmacies de garde Section -->
+        <section id="pharmacies" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Pharmacies de garde</h2>
+                    <p class="text-xl text-gris-anthracite">Les pharmacies ouvertes actuellement</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-heading font-semibold">Pharmacie de garde cette semaine</h3>
+                            <p class="text-gris-anthracite">Du 12 au 18 juin 2023</p>
+                        </div>
+                        <div class="bg-jaune-soleil text-gris-anthracite px-4 py-2 rounded-full font-medium">
+                            En temps réel
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="p-6 border-b">
+                            <h3 class="text-xl font-heading font-semibold mb-2">Pharmacie Centrale</h3>
+                            <p class="text-gris-anthracite mb-2"><i class="fas fa-map-marker-alt text-bleu-caraibes mr-2"></i> 25 Rue Victor Hugo, Fort-de-France</p>
+                            <p class="text-gris-anthracite mb-2"><i class="fas fa-phone text-bleu-caraibes mr-2"></i> 0596 70 12 34</p>
+                            <div class="flex items-center">
+                                <div class="bg-vert-tropical text-white px-2 py-1 rounded text-sm mr-2">Ouverte</div>
+                                <span class="text-gris-anthracite">Fermeture à 22h00</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-medium mb-2">Horaires cette semaine :</h4>
+                            <ul class="text-sm text-gris-anthracite">
+                                <li class="flex justify-between py-1"><span>Lundi - Vendredi</span><span>8h - 20h</span></li>
+                                <li class="flex justify-between py-1"><span>Samedi</span><span>8h - 22h</span></li>
+                                <li class="flex justify-between py-1"><span>Dimanche</span><span>10h - 22h</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="p-6 border-b">
+                            <h3 class="text-xl font-heading font-semibold mb-2">Pharmacie du Levant</h3>
+                            <p class="text-gris-anthracite mb-2"><i class="fas fa-map-marker-alt text-bleu-caraibes mr-2"></i> 8 Rue Ernest Deproge, Le Lamentin</p>
+                            <p class="text-gris-anthracite mb-2"><i class="fas fa-phone text-bleu-caraibes mr-2"></i> 0596 50 98 76</p>
+                            <div class="flex items-center">
+                                <div class="bg-vert-tropical text-white px-2 py-1 rounded text-sm mr-2">Ouverte</div>
+                                <span class="text-gris-anthracite">Fermeture à 21h30</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-medium mb-2">Horaires cette semaine :</h4>
+                            <ul class="text-sm text-gris-anthracite">
+                                <li class="flex justify-between py-1"><span>Lundi - Vendredi</span><span>8h - 20h</span></li>
+                                <li class="flex justify-between py-1"><span>Samedi</span><span>9h - 21h30</span></li>
+                                <li class="flex justify-between py-1"><span>Dimanche</span><span>10h - 20h</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 bg-bleu-caraibes text-white p-6 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="text-3xl mr-4">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-heading font-semibold mb-2">Service d'urgence pharmaceutique</h3>
+                            <p>En cas d'urgence médicamenteuse en dehors des heures d'ouverture, composez le 15 (SAMU) qui vous orientera vers la pharmacie de garde la plus proche.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Urgences Section -->
+        <section id="urgences" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Numéros et centres d'urgence</h2>
+                    <p class="text-xl text-gris-anthracite">En cas d'urgence, contactez rapidement les services compétents</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-red-100 border-l-4 border-red-500 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-red-500 text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-ambulance text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-heading font-semibold">SAMU</h3>
+                        </div>
+                        <p class="text-gris-anthracite mb-4">Service d'Aide Médicale Urgente</p>
+                        <a href="tel:15" class="text-red-600 text-2xl font-bold block text-center">15</a>
+                    </div>
+                    
+                    <div class="bg-blue-100 border-l-4 border-blue-500 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-500 text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-fire-extinguisher text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-heading font-semibold">Pompiers</h3>
+                        </div>
+                        <p class="text-gris-anthracite mb-4">Service Incendie et Secours</p>
+                        <a href="tel:18" class="text-blue-600 text-2xl font-bold block text-center">18</a>
+                    </div>
+                    
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-yellow-500 text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-shield-alt text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-heading font-semibold">Police</h3>
+                        </div>
+                        <p class="text-gris-anthracite mb-4">Police Secours</p>
+                        <a href="tel:17" class="text-yellow-600 text-2xl font-bold block text-center">17</a>
+                    </div>
+                    
+                    <div class="bg-green-100 border-l-4 border-green-500 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-green-500 text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-phone-alt text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-heading font-semibold">Urgence Européenne</h3>
+                        </div>
+                        <p class="text-gris-anthracite mb-4">Numéro d'urgence unique</p>
+                        <a href="tel:112" class="text-green-600 text-2xl font-bold block text-center">112</a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-2xl font-heading font-semibold text-bleu-caraibes mb-6">Centres hospitaliers en Martinique</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-heading font-semibold mb-3">CHU de Martinique</h4>
+                            <p class="text-gris-anthracite mb-3"><i class="fas fa-map-marker-alt text-bleu-caraibes mr-2"></i> Avenue du Docteur Frantz Fanon, Fort-de-France</p>
+                            <p class="text-gris-anthracite mb-3"><i class="fas fa-phone text-bleu-caraibes mr-2"></i> 0596 55 20 00</p>
+                            <p class="text-gris-anthracite mb-4">Centre hospitalier universitaire avec services d'urgences adultes et pédiatriques.</p>
+                            <a href="#" class="text-bleu-caraibes font-medium hover:underline">Voir sur la carte</a>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-heading font-semibold mb-3">Centre Hospitalier du Nord</h4>
+                            <p class="text-gris-anthracite mb-3"><i class="fas fa-map-marker-alt text-bleu-caraibes mr-2"></i> Quartier Morne Calebasse, Saint-Pierre</p>
+                            <p class="text-gris-anthracite mb-3"><i class="fas fa-phone text-bleu-caraibes mr-2"></i> 0596 78 40 40</p>
+                            <p class="text-gris-anthracite mb-4">Établissement de santé de proximité pour la région nord de la Martinique.</p>
+                            <a href="#" class="text-bleu-caraibes font-medium hover:underline">Voir sur la carte</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conseils santé Section -->
+        <section id="conseils" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Conseils santé</h2>
+                    <p class="text-xl text-gris-anthracite">Prenez soin de votre santé sous les tropiques</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-smooth">
+                        <img src="https://picsum.photos/400/300?random=7" alt="Protection solaire" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-heading font-semibold mb-3">Se protéger du soleil</h3>
+                            <p class="text-gris-anthracite mb-4">En Martinique, le soleil tropical est intense. Découvrez les bonnes pratiques pour protéger votre peau.</p>
+                            <a href="#" class="text-bleu-caraibes font-medium hover:underline">Lire la suite</a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-smooth">
+                        <img src="https://picsum.photos/400/300?random=8" alt="Prévention dengue" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-heading font-semibold mb-3">Prévenir la dengue</h3>
+                            <p class="text-gris-anthracite mb-4">Apprenez à reconnaître les symptômes et adoptez les gestes pour éviter la prolifération des moustiques.</p>
+                            <a href="#" class="text-bleu-caraibes font-medium hover:underline">Lire la suite</a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-smooth">
+                        <img src="https://picsum.photos/400/300?random=9" alt="Alimentation tropicale" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-heading font-semibold mb-3">Bien s'alimenter</h3>
+                            <p class="text-gris-anthracite mb-4">Découvrez les fruits et légumes locaux et leurs bienfaits pour une alimentation saine et équilibrée.</p>
+                            <a href="#" class="text-bleu-caraibes font-medium hover:underline">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <a href="#" class="inline-block bg-vert-tropical text-white px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-smooth">Voir tous les conseils</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Ils nous font confiance</h2>
+                    <p class="text-xl text-gris-anthracite">Ce que disent nos utilisateurs</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="text-jaune-soleil text-2xl mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gris-anthracite mb-6">"Grâce à Madinina Santé, j'ai pu trouver une pharmacie ouverte tard le soir pour mon fils qui faisait de la fièvre. Un service indispensable !"</p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/60/60?random=10" alt="Marie J." class="w-12 h-12 rounded-full mr-4" loading="lazy">
+                            <div>
+                                <p class="font-medium">Marie J.</p>
+                                <p class="text-sm text-gris-anthracite">Fort-de-France</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="text-jaune-soleil text-2xl mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gris-anthracite mb-6">"En vacances en Martinique, j'ai eu besoin d'un dentiste en urgence. L'annuaire m'a permis d'en trouver un rapidement près de mon lieu d'hébergement."</p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/60/60?random=11" alt="Pierre L." class="w-12 h-12 rounded-full mr-4" loading="lazy">
+                            <div>
+                                <p class="font-medium">Pierre L.</p>
+                                <p class="text-sm text-gris-anthracite">Touriste</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="text-jaune-soleil text-2xl mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <p class="text-gris-anthracite mb-6">"Les conseils santé adaptés au climat martiniquais sont très utiles, surtout pour les nouveaux arrivants. Je consulte régulièrement cette rubrique."</p>
+                        <div class="flex items-center">
+                            <img src="https://picsum.photos/60/60?random=12" alt="Sophie M." class="w-12 h-12 rounded-full mr-4" loading="lazy">
+                            <div>
+                                <p class="font-medium">Sophie M.</p>
+                                <p class="text-sm text-gris-anthracite">Le Lamentin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Questions fréquentes</h2>
+                    <p class="text-xl text-gris-anthracite">Trouvez des réponses à vos questions</p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-md mb-4">
+                        <button class="faq-question w-full text-left p-6 font-medium text-gris-anthracite flex justify-between items-center">
+                            <span>Comment savoir quelle pharmacie est de garde ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer p-6 border-t hidden">
+                            <p class="text-gris-anthracite">Notre section "Pharmacies de garde" est mise à jour en temps réel avec les pharmacies ouvertes. Vous pouvez filtrer par ville et voir les horaires précis pour chaque établissement.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md mb-4">
+                        <button class="faq-question w-full text-left p-6 font-medium text-gris-anthracite flex justify-between items-center">
+                            <span>Les informations sont-elles vérifiées ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer p-6 border-t hidden">
+                            <p class="text-gris-anthracite">Oui, notre équipe vérifie régulièrement les horaires et coordonnées des professionnels de santé. Les pharmacies de garde sont mises à jour quotidiennement en collaboration avec les officines.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md mb-4">
+                        <button class="faq-question w-full text-left p-6 font-medium text-gris-anthracite flex justify-between items-center">
+                            <span>Comment prendre rendez-vous avec un médecin ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer p-6 border-t hidden">
+                            <p class="text-gris-anthracite">Sur chaque fiche professionnel, un bouton "Prendre RDV" vous permet soit d'appeler directement le cabinet, soit d'accéder à leur système de réservation en ligne si disponible.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md mb-4">
+                        <button class="faq-question w-full text-left p-6 font-medium text-gris-anthracite flex justify-between items-center">
+                            <span>Le service est-il gratuit ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer p-6 border-t hidden">
+                            <p class="text-gris-anthracite">Oui, l'accès à Madinina Santé est entièrement gratuit pour les utilisateurs. Nous sommes financés par des partenariats avec les institutions de santé locales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold font-heading text-bleu-caraibes mb-4">Contactez-nous</h2>
+                    <p class="text-xl text-gris-anthracite">Une question, une suggestion ? Écrivez-nous</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-gris-anthracite font-medium mb-2">Nom complet</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-bleu-caraibes" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-gris-anthracite font-medium mb-2">Adresse email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-bleu-caraibes" required>
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-gris-anthracite font-medium mb-2">Sujet</label>
+                                <select id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-bleu-caraibes">
+                                    <option>Question générale</option>
+                                    <option>Signaler une erreur</option>
+                                    <option>Proposition de partenariat</option>
+                                    <option>Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-gris-anthracite font-medium mb-2">Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-bleu-caraibes" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-bleu-caraibes text-white px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-smooth">Envoyer le message</button>
+                        </form>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-gray-50 p-8 rounded-lg">
+                            <h3 class="text-xl font-heading font-semibold mb-6">Coordonnées</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="bg-bleu-caraibes text-white rounded-full p-3 mr-4">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Adresse</h4>
+                                        <p class="text-gris-anthracite">15 Rue de la République<br>97200 Fort-de-France<br>Martinique</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-vert-tropical text-white rounded-full p-3 mr-4">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Téléphone</h4>
+                                        <p class="text-gris-anthracite">+596 596 12 34 56</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-jaune-soleil text-gris-anthracite rounded-full p-3 mr-4">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Email</h4>
+                                        <p class="text-gris-anthracite">contact@madininasante.mq</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-gris-anthracite text-white rounded-full p-3 mr-4">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">Horaires</h4>
+                                        <p class="text-gris-anthracite">Lundi - Vendredi: 8h - 18h<br>Samedi: 9h - 12h</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <h4 class="font-medium mb-4">Suivez-nous</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="bg-bleu-caraibes text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-90 transition-smooth">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="bg-bleu-caraibes text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-90 transition-smooth">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="bg-bleu-caraibes text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-90 transition-smooth">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="bg-bleu-caraibes text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-90 transition-smooth">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gris-anthracite text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-heading font-semibold mb-4">Madinina Santé</h3>
+                    <p class="mb-4">Votre portail santé en Martinique pour trouver rapidement médecins, pharmacies de garde et numéros d'urgence.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-jaune-soleil transition-smooth">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-jaune-soleil transition-smooth">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-jaune-soleil transition-smooth">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-heading font-semibold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-jaune-soleil transition-smooth">Accueil</a></li>
+                        <li><a href="#annuaire" class="hover:text-jaune-soleil transition-smooth">Annuaire</a></li>
+                        <li><a href="#pharmacies" class="hover:text-jaune-soleil transition-smooth">Pharmacies de garde</a></li>
+                        <li><a href="#urgences" class="hover:text-jaune-soleil transition-smooth">Urgences</a></li>
+                        <li><a href="#conseils" class="hover:text-jaune-soleil transition-smooth">Conseils santé</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-heading font-semibold mb-4">Ressources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-jaune-soleil transition-smooth">Blog santé</a></li>
+                        <li><a href="#" class="hover:text-jaune-soleil transition-smooth">FAQ</a></li>
+                        <li><a href="#" class="hover:text-jaune-soleil transition-smooth">Mentions légales</a></li>
+                        <li><a href="#" class="hover:text-jaune-soleil transition-smooth">Politique de confidentialité</a></li>
+                        <li><a href="#" class="hover:text-jaune-soleil transition-smooth">Plan du site</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-heading font-semibold mb-4">Newsletter</h3>
+                    <p class="mb-4">Abonnez-vous à notre newsletter pour recevoir les actualités santé en Martinique.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l-lg w-full text-gris-anthracite focus:outline-none">
+                        <button type="submit" class="bg-bleu-caraibes px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition-smooth">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p>&copy; 2023 Madinina Santé. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                // Toggle answer visibility
+                answer.classList.toggle('hidden');
+                
+                // Rotate icon
+                if (answer.classList.contains('hidden')) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+        
+        // Form validation
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    // Simulate form submission
+                    alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
+                    contactForm.reset();
+                } else {
+                    alert('Veuillez remplir tous les champs obligatoires.');
+                }
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Adjust for header height
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
