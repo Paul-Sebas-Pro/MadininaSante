@@ -16,12 +16,14 @@ const openSans = Open_Sans({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://madinina-sante.pages.dev";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://madinina-sante.pages.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Madinina Santé — Pharmacies de garde, médecins et urgences en Martinique",
+    default:
+      "Madinina Santé — Pharmacies de garde, médecins et urgences en Martinique",
     template: "%s · Madinina Santé",
   },
   description:

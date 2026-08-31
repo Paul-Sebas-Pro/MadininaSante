@@ -1,7 +1,7 @@
 # PROJECT_STATE — Madinina Santé
 
 > État vivant du projet. Mis à jour à chaque fin de session.
-> Dernière mise à jour : 2026-08-30 (fin de session)
+> Dernière mise à jour : 2026-08-31 — jalon 0 **terminé** (branche `feat/jalon-0-suite`).
 
 ## Le projet en une phrase
 
@@ -9,71 +9,73 @@ PWA (Next.js) qui centralise pour la Martinique (972) : pharmacies/médecins de 
 annuaire des professionnels de santé, urgences et conseils santé tropicale — gratuit,
 FR/EN, habitants + touristes, hébergement à coût 0 €.
 
-## Décisions validées (avec l'utilisateur)
+## Décisions validées
 
-1. **Plateforme v1** : PWA web-first. Stores plus tard via Capacitor (jalon 6, optionnel).
-2. **Codebase** : Next.js App Router + TypeScript, repartir propre. Les 4 dossiers IA
-   d'origine sont archivés dans `docs/legacy/` (référence figée, cahier des charges).
-3. **Données** : open data (data.gouv.fr Annuaire Santé / FINESS + OSM) pour l'annuaire ;
-   **curation manuelle via back-office `/admin`** pour le calendrier des gardes.
-   Pas de scraping, pas d'attente de partenariat pour lancer.
-4. **Budget infra** : strictement 0 €/mois (free tiers uniquement).
+Voir `docs/decisions.md`. Résumé : PWA web-first · Next.js neuf · annuaire open data +
+gardes en curation manuelle via `/admin` · infra strictement 0 €/mois.
+Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-cocke.md`).
 
-Roadmap détaillée : `/home/pablo/.claude/plans/prendre-connaissance-du-contexte-snoopy-cocke.md`
+## Stack en place
 
-## Stack
+- Next.js **16.3.3** (App Router, Turbopack) + React 19 + TS
+- Tailwind CSS v4 — tokens charte dans `src/app/globals.css`
+- Supabase (Postgres/PostGIS/Auth/RLS) + Drizzle ORM — **schéma écrit, base pas encore créée**
+- Déps : `@supabase/{supabase-js,ssr}`, `drizzle-orm`, `postgres`, `zod`, `clsx`,
+  `tailwind-merge`, `class-variance-authority`, `lucide-react`, `next-intl`, `server-only`
+  ; dev : `prettier` (+ plugin tailwind), `drizzle-kit`, `tsx`, `dotenv`, `@types/pg`
+- pnpm via corepack. `pnpm-workspace.yaml` → `allowBuilds` esbuild=true.
 
-- Next.js 16 (App Router, Turbopack) + React 19 + TypeScript
-- Tailwind CSS v4 (tokens charte dans `src/app/globals.css`) + shadcn/ui (à ajouter au jalon 1)
-- next-intl (FR défaut + EN) — à câbler au jalon 1
-- Supabase (Postgres + PostGIS + Auth + RLS) — schéma à créer
-- Drizzle ORM + drizzle-kit (migrations versionnées)
-- Carto : MapLibre GL + tuiles OpenFreeMap (jalon 1)
-- Hébergement : Cloudflare Pages (ou Vercel Hobby)
-- Déps déjà installées : `@supabase/supabase-js`, `@supabase/ssr`, `drizzle-orm`,
-  `postgres`, `zod`, `clsx`, `tailwind-merge`, `class-variance-authority`,
-  `lucide-react`, `next-intl` ; dev : `prettier`, `prettier-plugin-tailwindcss`,
-  `drizzle-kit`, `@types/pg`, `tsx`, `dotenv`.
-- pnpm (via corepack). `pnpm-workspace.yaml` : `allowBuilds` esbuild=true, sharp/swc/parcel=false.
+## Fait — jalon 0 (terminé)
 
-## Fait cette session (jalon 0 — en cours)
+- [x] Branche `feat/jalon-0-suite`.
+- [x] `src/app/globals.css` : tokens charte (caraibes/tropical/soleil/anthracite/urgence, polices).
+- [x] `src/app/layout.tsx` : polices Montserrat + Open Sans, `lang="fr"`, metadata SEO, viewport themeColor.
+- [x] Route group `(site)` : `layout.tsx` (header + footer), `page.tsx` (accueil coquille).
+- [x] `src/components/site/{header,footer}.tsx` + `src/lib/navigation.ts` (nav + disclaimer urgence).
+- [x] `src/app/not-found.tsx`.
+- [x] `src/lib/env.ts` (validation zod) + `.env.example` + `.gitignore` (`!.env.example`).
+- [x] `src/lib/supabase/{client,server}.ts` (via `@supabase/ssr`), `src/lib/utils.ts` (`cn`).
+- [x] `src/db/schema.ts` (Drizzle) + `src/db/index.ts` (connexion tolérante à l'absence de `DATABASE_URL`).
+- [x] `drizzle.config.ts` (out → `drizzle/`, gitignoré, garde-fou anti-dérive).
+- [x] `supabase/migrations/0001_init.sql` : PostGIS, enums, tables
+      (`establishments` avec `location geography` générée + GIST + trigram,
+      `shifts` **table unique avec `kind`**, `emergency_contacts`, `articles`,
+      `pro_claims`, `profiles`), triggers `updated_at`, `handle_new_user`, `is_editor()`,
+      **RLS** (lecture publique du contenu, écriture éditeurs, insert claim public).
+- [x] `supabase/seed.sql` : 10 numéros d'urgence (SAMU, pompiers, SOS Médecins 972, CROSS AG…).
+- [x] Scripts `package.json` : `format`, `format:check`, `typecheck`, `db:generate`, `db:check`.
+- [x] `.prettierrc.json` + `.prettierignore` ; `eslint.config.mjs` ignore `docs/legacy/**`.
+- [x] `.github/workflows/ci.yml` : install + format:check + lint + typecheck + build.
+- [x] `README.md` réécrit ; `docs/{README,decisions,roadmap,data-strategy}.md`.
+- [x] **Vérifié** : `pnpm build` OK (`/` + `/_not-found` prérendus statiques), `typecheck` OK,
+      `lint` OK, `format:check` OK, smoke test `next start` (home + 404) OK.
 
-- [x] Branche `feat/jalon-0-fondations` créée.
-- [x] Nettoyage racine : 4 dossiers IA + `Prompt.md` déplacés dans `docs/legacy/`.
-- [x] Scaffold `create-next-app` (TS, Tailwind v4, App Router, src/, alias `@/*`, ESLint, Turbopack).
-- [x] Dépendances runtime + dev installées.
-- [x] `src/app/globals.css` : tokens de la charte (caraibes/tropical/soleil/anthracite/urgence, polices).
-- [x] `src/app/layout.tsx` : polices Montserrat + Open Sans, `lang="fr"`, metadata SEO de base, viewport themeColor.
+## Reste à faire — jalon 0 (hors code, avec l'utilisateur)
 
-## Reste à faire — jalon 0
+- [ ] Créer le projet Supabase réel, remplir `.env.local`, appliquer
+      `supabase/migrations/0001_init.sql` + `supabase/seed.sql` (SQL editor ou `supabase` CLI).
+- [ ] Créer le repo GitHub distant + brancher **Cloudflare Pages** (build `pnpm build`,
+      sortie `.next`, var `NEXT_PUBLIC_SITE_URL`), obtenir l'URL `*.pages.dev`.
+- [ ] Ajouter `logo_madinina_sante.png` (dans `docs/legacy/.../`) → `public/` + favicons/icônes PWA.
 
-- [ ] `src/app/page.tsx` : remplacer la home create-next-app par la coquille d'accueil
-      (hero + accès rapides Garde/Urgences/Annuaire). **Brouillon prêt, non écrit** (session en pause).
-- [ ] `src/lib/env.ts` (validation zod des variables d'env) + `.env.example`.
-- [ ] `src/lib/supabase/{client,server}.ts` + `src/lib/utils.ts` (`cn`).
-- [ ] `src/db/schema.ts` (Drizzle) + `supabase/migrations/0001_init.sql` :
-      tables `establishments` (PostGIS), `pharmacy_shifts`, `doctor_shifts`,
-      `emergency_contacts`, `articles`, `pro_claims` + RLS lecture publique.
-- [ ] `drizzle.config.ts`.
-- [ ] Scripts `package.json` : `format`, `typecheck`, `db:generate`, `db:migrate`.
-- [ ] `.prettierrc` + `prettier-plugin-tailwindcss`.
-- [ ] `.github/workflows/ci.yml` : install + lint + typecheck + build (+ Lighthouse CI plus tard).
-- [ ] `README.md` : réécrire (create-next-app l'a écrasé) — présentation, setup, scripts.
-- [ ] `docs/` : déplacer/synthétiser les specs hors de `legacy/` (architecture.md, data-strategy.md).
-- [ ] Créer projet Supabase réel + remplir `.env.local` + `pnpm db:migrate`.
-- [ ] Premier déploiement preview Cloudflare Pages.
+## Prochaine session — jalon 1 (MVP consultable)
 
-## Prochaine session — reprendre ici
-
-1. Écrire `src/app/page.tsx` (coquille d'accueil).
-2. Enchaîner la liste "Reste à faire — jalon 0" ci-dessus.
-3. Puis jalon 1 (MVP consultable) — voir le plan.
+1. i18n : `next-intl` (FR défaut + EN), restructurer sous `src/app/[locale]/`, `messages/`.
+2. Page **Urgences** (lecture `emergency_contacts`, fallback statique) + disclaimer.
+3. Page **Annuaire** : script `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres
+   + recherche plein texte + fiche détaillée + carte MapLibre + « autour de moi » (PostGIS).
+4. shadcn/ui (init), composants `Map`, `SearchBar`, `ProCard`.
+5. PWA (`@ducanh2912/next-pwa` ou équivalent Next 16), `manifest.ts`, `sitemap.ts`, `robots.ts`.
+6. Pages légales : `/mentions-legales`, `/confidentialite`, `/sources`, `/contact`, `/a-propos`.
+7. JSON-LD (`Pharmacy`, `Hospital`, `MedicalBusiness`) sur les fiches.
 
 ## Notes / points d'attention
 
-- **Next.js 16** (pas 15) : conventions modifiées vs training data. `AGENTS.md` (auto-généré,
-  importé par `CLAUDE.md`) impose de lire `node_modules/next/dist/docs/` avant d'écrire du code Next.
-- `README.md` original (15 o) écrasé par create-next-app — à réécrire, pas une perte.
-- Contraste : `soleil #FFD700` sur blanc échoue WCAG AA → réservé aux fonds/icônes, jamais texte.
-- Attribution **© OpenStreetMap** obligatoire (footer + page sources) dès qu'on importe les données OSM.
-- Disclaimer « urgence vitale = 15 » à afficher sur Accueil / Urgences / Garde.
+- **Next.js 16** : lire `node_modules/next/dist/docs/` avant d'écrire du code Next
+  (imposé par `AGENTS.md`, importé par `CLAUDE.md`). Layouts typés : `LayoutProps<"/">`.
+  `cookies()` est **async**.
+- Migration SQL 0001 pas encore appliquée sur une vraie base → à tester au 1er déploiement.
+- `shifts` = 1 table (`kind` = pharmacie|medecin|mmg), pas 2 tables comme le plan initial.
+- Contraste : `soleil #FFD700` sur blanc échoue WCAG AA → fonds/icônes only, jamais texte.
+- Attribution **© OpenStreetMap** déjà dans le footer — garder dès l'import OSM + page `/sources`.
+- Header : menu mobile = simple wrap pour l'instant ; vrai burger (client component) au jalon 1.
