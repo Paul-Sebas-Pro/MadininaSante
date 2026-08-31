@@ -63,7 +63,7 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
 1. i18n : `next-intl` (FR défaut + EN), restructurer sous `src/app/[locale]/`, `messages/`.
 2. Page **Urgences** (lecture `emergency_contacts`, fallback statique) + disclaimer.
 3. Page **Annuaire** : script `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres
-   + recherche plein texte + fiche détaillée + carte MapLibre + « autour de moi » (PostGIS).
+   - recherche plein texte + fiche détaillée + carte MapLibre + « autour de moi » (PostGIS).
 4. shadcn/ui (init), composants `Map`, `SearchBar`, `ProCard`.
 5. PWA (`@ducanh2912/next-pwa` ou équivalent Next 16), `manifest.ts`, `sitemap.ts`, `robots.ts`.
 6. Pages légales : `/mentions-legales`, `/confidentialite`, `/sources`, `/contact`, `/a-propos`.
