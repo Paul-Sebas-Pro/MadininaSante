@@ -7,16 +7,13 @@ import { z } from "zod";
  */
 
 const serverSchema = z.object({
-  DATABASE_URL: z.string().url().optional(),
+  DATABASE_URL: z.url().optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
 });
 
 const clientSchema = z.object({
-  NEXT_PUBLIC_SITE_URL: z
-    .string()
-    .url()
-    .default("https://madinina-sante.pages.dev"),
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(),
+  NEXT_PUBLIC_SITE_URL: z.url().default("https://madinina-sante.pages.dev"),
+  NEXT_PUBLIC_SUPABASE_URL: z.url().optional(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1).optional(),
 });
 

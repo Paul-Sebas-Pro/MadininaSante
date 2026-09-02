@@ -1,7 +1,8 @@
 # PROJECT_STATE — Madinina Santé
 
 > État vivant du projet. Mis à jour à chaque fin de session.
-> Dernière mise à jour : 2026-08-31 — jalon 0 **terminé** (branche `feat/jalon-0-suite`).
+> Dernière mise à jour : 2026-09-02 — jalon 1 **en cours** (branche `feat/jalon-1-mvp`) : i18n + page Urgences faits.
+> Jalon 0 mergé dans `main` (PR #2, `bbddfb8`).
 
 ## Le projet en une phrase
 
@@ -49,6 +50,8 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
 - [x] `README.md` réécrit ; `docs/{README,decisions,roadmap,data-strategy}.md`.
 - [x] **Vérifié** : `pnpm build` OK (`/` + `/_not-found` prérendus statiques), `typecheck` OK,
       `lint` OK, `format:check` OK, smoke test `next start` (home + 404) OK.
+- [x] CI verte après 2 correctifs : `PROJECT_STATE.md` formaté prettier ;
+      `typecheck` = `next typegen && tsc --noEmit` (type global `LayoutProps` sinon absent en CI).
 
 ## Reste à faire — jalon 0 (hors code, avec l'utilisateur)
 
@@ -58,16 +61,35 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
       sortie `.next`, var `NEXT_PUBLIC_SITE_URL`), obtenir l'URL `*.pages.dev`.
 - [ ] Ajouter `logo_madinina_sante.png` (dans `docs/legacy/.../`) → `public/` + favicons/icônes PWA.
 
-## Prochaine session — jalon 1 (MVP consultable)
+## Fait — jalon 1 (en cours, branche `feat/jalon-1-mvp`)
 
-1. i18n : `next-intl` (FR défaut + EN), restructurer sous `src/app/[locale]/`, `messages/`.
-2. Page **Urgences** (lecture `emergency_contacts`, fallback statique) + disclaimer.
-3. Page **Annuaire** : script `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres
+- [x] `src/lib/env.ts` : `z.string().url()` (déprécié zod 4) → `z.url()`.
+- [x] **i18n next-intl** (FR défaut, EN sous `/en`, `localePrefix: as-needed`) :
+      `src/i18n/{routing,navigation,request}.ts`, `src/proxy.ts` (Next 16 : `proxy` pas `middleware`),
+      plugin dans `next.config.ts`, `messages/{fr,en}.json`.
+- [x] Routes déplacées sous `src/app/[locale]/` : root `layout.tsx` = pass-through,
+      `[locale]/layout.tsx` = `<html lang>` + polices + `NextIntlClientProvider` +
+      `generateStaticParams` + `generateMetadata` localisée + `setRequestLocale`.
+      `[locale]/not-found.tsx`, `[locale]/[...rest]/page.tsx` (catch-all → 404),
+      root `not-found.tsx` (html/body complet).
+- [x] `SiteHeader`/`SiteFooter` traduits ; `LangSwitcher` (client) ;
+      `src/lib/navigation.ts` → `mainNav` avec `labelKey`.
+- [x] **Page Urgences** `/urgences` : `src/lib/emergency-data.ts` (10 numéros + 4 hôpitaux,
+      FR/EN), liens `tel:`, groupée national/local/hôpitaux, metadata.
+- [x] **Vérifié** : build OK (`/fr`, `/en`, `/fr/urgences`, `/en/urgences` en **SSG**),
+      typecheck/lint/format OK, smoke test (FR/EN home + urgences + 404 + redirect `/fr`→`/`).
+
+## Reste — jalon 1
+
+1. Page **Annuaire** : `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres
    - recherche plein texte + fiche détaillée + carte MapLibre + « autour de moi » (PostGIS).
-4. shadcn/ui (init), composants `Map`, `SearchBar`, `ProCard`.
-5. PWA (`@ducanh2912/next-pwa` ou équivalent Next 16), `manifest.ts`, `sitemap.ts`, `robots.ts`.
-6. Pages légales : `/mentions-legales`, `/confidentialite`, `/sources`, `/contact`, `/a-propos`.
-7. JSON-LD (`Pharmacy`, `Hospital`, `MedicalBusiness`) sur les fiches.
+2. Câbler Urgences sur `emergency_contacts` (DB) avec fallback statique quand pas de DB.
+3. shadcn/ui (init), composants `Map`, `SearchBar`, `ProCard`.
+4. PWA (`next-pwa` compatible Next 16), `manifest.ts`, `sitemap.ts`, `robots.ts`.
+5. Pages légales : `/mentions-legales`, `/confidentialite`, `/sources`, `/contact`, `/a-propos`
+   (footer y pointe déjà → 404 pour l'instant).
+6. JSON-LD (`Pharmacy`, `Hospital`, `MedicalBusiness`) sur les fiches + page Urgences.
+7. Vrai menu burger mobile (client component).
 
 ## Notes / points d'attention
 
