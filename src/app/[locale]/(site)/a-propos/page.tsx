@@ -41,23 +41,22 @@ export default async function AProposPage({
           <p>
             Madinina Santé regroupe au même endroit les informations pratiques
             de santé en Martinique : pharmacies et médecins de garde, annuaire
-            des professionnels, numéros d&apos;urgence et conseils adaptés au
-            climat tropical.
+            des professionnels, numéros d’urgence et conseils adaptés au climat
+            tropical.
           </p>
           <h2>Gratuit et indépendant</h2>
           <p>
-            Le service est gratuit pour les utilisateurs. Il n&apos;exige aucun
+            Le service est gratuit pour les utilisateurs. Il n’exige aucun
             compte et ne collecte aucune donnée de santé.
           </p>
-          <h2>D&apos;où viennent les données</h2>
+          <h2>D’où viennent les données</h2>
           <p>
-            L&apos;annuaire s&apos;appuie sur les données publiques
-            (data.gouv.fr, FINESS) et OpenStreetMap. Les gardes sont saisies et
-            vérifiées manuellement. Voir la page{" "}
-            <Link href="/sources">Sources des données</Link>.
+            L’annuaire s’appuie sur les données publiques (data.gouv.fr, FINESS)
+            et OpenStreetMap. Les gardes sont saisies et vérifiées manuellement.
+            Voir la page <Link href="/sources">Sources des données</Link>.
           </p>
           <p className="text-anthracite-soft text-sm">
-            En cas d&apos;urgence vitale, appelez le 15 ou le 112.
+            En cas d’urgence vitale, appelez le 15 ou le 112.
           </p>
         </>
       ) : (

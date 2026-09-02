@@ -32,7 +32,7 @@ export default async function SourcesPage({
         <>
           <h2>Annuaire des professionnels et établissements</h2>
           <p>
-            Construit à partir de données publiques : l&apos;Annuaire Santé
+            Construit à partir de données publiques : l’Annuaire Santé
             (Assurance Maladie) et la base FINESS, diffusées sur data.gouv.fr
             sous Licence Ouverte / Etalab, complétées par OpenStreetMap.
           </p>
@@ -51,8 +51,7 @@ export default async function SourcesPage({
           <p>
             Ces informations sont fournies à titre indicatif et peuvent contenir
             des erreurs ou être périmées. Elles ne remplacent pas un avis
-            médical. En cas d&apos;urgence vitale, appelez le 15 (SAMU) ou le
-            112.
+            médical. En cas d’urgence vitale, appelez le 15 (SAMU) ou le 112.
           </p>
           <p>
             Une erreur ? <Link href="/contact">Signalez-la-nous</Link>.

@@ -32,9 +32,8 @@ export default async function MentionsLegalesPage({
           <h2>Éditeur</h2>
           <p>
             Madinina Santé — projet en cours de constitution. Les coordonnées
-            complètes de l&apos;éditeur seront publiées ici avant la mise en
-            ligne officielle. Contact :{" "}
-            <Link href="/contact">page contact</Link>.
+            complètes de l’éditeur seront publiées ici avant la mise en ligne
+            officielle. Contact : <Link href="/contact">page contact</Link>.
           </p>
           <h2>Hébergement</h2>
           <p>
@@ -44,23 +43,23 @@ export default async function MentionsLegalesPage({
           <h2>Propriété intellectuelle</h2>
           <p>
             Les contenus rédactionnels de Madinina Santé sont protégés. Les
-            données de l&apos;annuaire et de la cartographie restent soumises
-            aux licences de leurs sources (voir{" "}
-            <Link href="/sources">Sources</Link>).
+            données de l’annuaire et de la cartographie restent soumises aux
+            licences de leurs sources (voir <Link href="/sources">Sources</Link>
+            ).
           </p>
           <h2>Responsabilité</h2>
           <p>
             Les informations sont fournies à titre indicatif, sans garantie
-            d&apos;exactitude ni d&apos;exhaustivité. En cas d&apos;urgence
-            vitale, appelez le 15 ou le 112.
+            d’exactitude ni d’exhaustivité. En cas d’urgence vitale, appelez le
+            15 ou le 112.
           </p>
         </>
       ) : (
         <>
           <h2>Publisher</h2>
           <p>
-            Madinina Santé — project being set up. The publisher&apos;s full
-            details will be published here before the official launch. Contact:{" "}
+            Madinina Santé — project being set up. The publisher’s full details
+            will be published here before the official launch. Contact:{" "}
             <Link href="/contact">contact page</Link>.
           </p>
           <h2>Hosting</h2>
@@ -70,8 +69,8 @@ export default async function MentionsLegalesPage({
           </p>
           <h2>Intellectual property</h2>
           <p>
-            Madinina Santé&apos;s editorial content is protected. Directory and
-            map data remain subject to their sources&apos; licences (see{" "}
+            Madinina Santé’s editorial content is protected. Directory and map
+            data remain subject to their sources’ licences (see{" "}
             <Link href="/sources">Sources</Link>).
           </p>
           <h2>Liability</h2>

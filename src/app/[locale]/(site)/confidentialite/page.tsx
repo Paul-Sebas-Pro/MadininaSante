@@ -43,13 +43,13 @@ export default async function ConfidentialitePage({
           <p>
             La fonction « autour de moi » utilise la géolocalisation de votre
             navigateur, uniquement à votre demande. Votre position est utilisée
-            sur votre appareil pour trier les résultats et n&apos;est ni stockée
-            ni transmise.
+            sur votre appareil pour trier les résultats et n’est ni stockée ni
+            transmise.
           </p>
-          <h2>Mesure d&apos;audience</h2>
+          <h2>Mesure d’audience</h2>
           <p>
-            Nous utilisons une mesure d&apos;audience respectueuse de la vie
-            privée, sans cookie et sans identification individuelle.
+            Nous utilisons une mesure d’audience respectueuse de la vie privée,
+            sans cookie et sans identification individuelle.
           </p>
           <h2>Formulaires</h2>
           <p>
@@ -68,16 +68,16 @@ export default async function ConfidentialitePage({
             Madinina Santé is built to work without collecting your personal
             data.
           </p>
-          <h2>What we don&apos;t do</h2>
+          <h2>What we don’t do</h2>
           <p>
             No user account, no health data, no advertising cookie or
             third-party tracker.
           </p>
           <h2>Geolocation</h2>
           <p>
-            The &quot;near me&quot; feature uses your browser&apos;s
-            geolocation, only when you ask for it. Your position is used on your
-            device to sort results and is neither stored nor transmitted.
+            The “near me” feature uses your browser’s geolocation, only when you
+            ask for it. Your position is used on your device to sort results and
+            is neither stored nor transmitted.
           </p>
           <h2>Analytics</h2>
           <p>

@@ -45,6 +45,10 @@ export async function generateMetadata(
       url: locale === routing.defaultLocale ? siteUrl : `${siteUrl}/${locale}`,
     },
     twitter: { card: "summary_large_image" },
+    icons: {
+      icon: "/favicon.ico",
+      apple: "/logo.png",
+    },
     alternates: {
       canonical: locale === routing.defaultLocale ? "/" : `/${locale}`,
       languages: { fr: "/", en: "/en" },
