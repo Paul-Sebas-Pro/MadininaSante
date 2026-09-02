@@ -52,6 +52,19 @@
       "social": "Écoute et social"
     }
   },
+  "placeholder": {
+    "badge": "En construction",
+    "body": "Cette section arrive bientôt. En attendant, consultez les numéros d'urgence et l'annuaire.",
+    "annuaireTitle": "Annuaire santé",
+    "pharmaciesTitle": "Pharmacies de garde",
+    "conseilsTitle": "Conseils santé"
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Une question, une erreur à signaler, une proposition de partenariat ?",
+    "emailIntro": "Écrivez-nous à",
+    "email": "contact@madinina-sante.example"
+  },
   "langSwitcher": {
     "label": "Langue",
     "fr": "Français",

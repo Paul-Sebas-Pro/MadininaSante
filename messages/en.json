@@ -52,6 +52,19 @@
       "social": "Support & social"
     }
   },
+  "placeholder": {
+    "badge": "Under construction",
+    "body": "This section is coming soon. In the meantime, check the emergency numbers and the directory.",
+    "annuaireTitle": "Health directory",
+    "pharmaciesTitle": "On-call pharmacies",
+    "conseilsTitle": "Health tips"
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "A question, an error to report, a partnership proposal?",
+    "emailIntro": "Write to us at",
+    "email": "contact@madinina-sante.example"
+  },
   "langSwitcher": {
     "label": "Language",
     "fr": "Français",
