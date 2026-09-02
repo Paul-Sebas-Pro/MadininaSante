@@ -20,7 +20,7 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
 
 - Next.js **16.3.3** (App Router, Turbopack) + React 19 + TS
 - Tailwind CSS v4 — tokens charte dans `src/app/globals.css`
-- Supabase (Postgres/PostGIS/Auth/RLS) + Drizzle ORM — **schéma écrit, base pas encore créée**
+- Supabase (Postgres/PostGIS/Auth/RLS) + Drizzle ORM — **base créée, migration + seed appliqués**
 - Déps : `@supabase/{supabase-js,ssr}`, `drizzle-orm`, `postgres`, `zod`, `clsx`,
   `tailwind-merge`, `class-variance-authority`, `lucide-react`, `next-intl`, `server-only`
   ; dev : `prettier` (+ plugin tailwind), `drizzle-kit`, `tsx`, `dotenv`, `@types/pg`
@@ -53,13 +53,14 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
 - [x] CI verte après 2 correctifs : `PROJECT_STATE.md` formaté prettier ;
       `typecheck` = `next typegen && tsc --noEmit` (type global `LayoutProps` sinon absent en CI).
 
-## Reste à faire — jalon 0 (hors code, avec l'utilisateur)
+## Infra (hors code)
 
-- [ ] Créer le projet Supabase réel, remplir `.env.local`, appliquer
-      `supabase/migrations/0001_init.sql` + `supabase/seed.sql` (SQL editor ou `supabase` CLI).
-- [ ] Créer le repo GitHub distant + brancher **Cloudflare Pages** (build `pnpm build`,
-      sortie `.next`, var `NEXT_PUBLIC_SITE_URL`), obtenir l'URL `*.pages.dev`.
-- [ ] Ajouter `logo_madinina_sante.png` (dans `docs/legacy/.../`) → `public/` + favicons/icônes PWA.
+- [x] Projet **Supabase** créé, `.env` renseigné (2026-09-02). Migration `0001_init.sql` + `seed.sql` **appliquées** via le session pooler (5432). 6 tables + PostGIS/pg_trgm,
+      10 numéros d'urgence. Lecture runtime OK via pooler transaction (6543, `prepare:false`).
+- [x] `logo_madinina_sante.png` → `public/logo.png`.
+- [ ] **Vercel** : importer le repo, coller les 5 env vars (dont `DATABASE_URL` en 6543),
+      déployer, remettre l'URL réelle dans `NEXT_PUBLIC_SITE_URL`. Voir README §Déploiement.
+      → **Cloudflare abandonné** pour la v1 (Pages ≠ Next 16 SSR ; Workers = adapter OpenNext + refacto DB). Cf. `docs/decisions.md` T6.
 
 ## Fait — jalon 1 (en cours, branche `feat/jalon-1-mvp`)
 
@@ -88,9 +89,9 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
 
 ## Reste — jalon 1
 
-1. Page **Annuaire** : `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres
-   - recherche plein texte + fiche détaillée + carte MapLibre + « autour de moi » (PostGIS).
-     **Bloqué** tant que la base Supabase n'existe pas.
+1. Page **Annuaire** : `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres,
+   recherche plein texte, fiche détaillée, carte MapLibre, « autour de moi » (PostGIS).
+   DB prête → débloqué.
 2. Câbler Urgences sur `emergency_contacts` (DB) avec fallback statique quand pas de DB.
 3. shadcn/ui (init), composants `Map`, `SearchBar`, `ProCard`.
 4. **Service Worker** offline (hand-roll dans `public/`, next-pwa incompatible Turbopack) +
@@ -108,8 +109,9 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
   mais reste fonctionnel — ce n'est qu'un _hint_ TS, la CI passe. Migration à faire dans une
   passe dédiée. Ne pas l'enlever sans vérifier que les pages restent en SSG.
 - i18n : `generateStaticParams` factorisé dans `src/lib/i18n-page.ts` (`generateLocaleParams`).
-- Migration SQL 0001 pas encore appliquée sur une vraie base → à tester au 1er déploiement.
 - `shifts` = 1 table (`kind` = pharmacie|medecin|mmg), pas 2 tables comme le plan initial.
+- Supabase région `us-east-1` (le projet a été créé là). `DATABASE_URL` = pooler
+  transaction 6543 ; pour le DDL, échanger `:6543`→`:5432` (session pooler).
 - Contraste : `soleil #FFD700` sur blanc échoue WCAG AA → fonds/icônes only, jamais texte.
 - Attribution **© OpenStreetMap** déjà dans le footer — garder dès l'import OSM + page `/sources`.
 - Header : menu mobile = simple wrap pour l'instant ; vrai burger (client component) au jalon 1.

@@ -39,6 +39,25 @@ Migrations SQL maintenues à la main dans `supabase/migrations/` (PostGIS, RLS,
 triggers). `supabase/seed.sql` contient les numéros d'urgence.
 `src/db/schema.ts` est le miroir Drizzle (typage + `db:check`).
 
+Appliquer sur une nouvelle base (via le **session pooler**, port 5432) :
+
+```bash
+DB=$(node -e "require('dotenv').config({quiet:true});const u=new URL(process.env.DATABASE_URL);u.port='5432';console.log(u.toString())")
+psql "$DB" -v ON_ERROR_STOP=1 -f supabase/migrations/0001_init.sql
+psql "$DB" -v ON_ERROR_STOP=1 -f supabase/seed.sql
+```
+
+## Déploiement (Vercel)
+
+1. [vercel.com](https://vercel.com) → **Add New… → Project** → importer le repo GitHub.
+2. Framework **Next.js** détecté. Ne rien changer (build `next build`, install pnpm auto).
+3. **Environment Variables** — coller depuis `.env` : `NEXT_PUBLIC_SITE_URL`
+   (= URL Vercel finale), `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+   `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL` (pooler **6543**).
+4. **Deploy**. Puis remettre l'URL réelle dans `NEXT_PUBLIC_SITE_URL` et redéployer.
+
+Chaque PR obtient une preview automatique. La CI GitHub (`lint`/`typecheck`/`build`) reste en place.
+
 ## Structure
 
 ```
