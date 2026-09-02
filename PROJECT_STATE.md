@@ -76,26 +76,38 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
       `src/lib/navigation.ts` → `mainNav` avec `labelKey`.
 - [x] **Page Urgences** `/urgences` : `src/lib/emergency-data.ts` (10 numéros + 4 hôpitaux,
       FR/EN), liens `tel:`, groupée national/local/hôpitaux, metadata.
-- [x] **Vérifié** : build OK (`/fr`, `/en`, `/fr/urgences`, `/en/urgences` en **SSG**),
-      typecheck/lint/format OK, smoke test (FR/EN home + urgences + 404 + redirect `/fr`→`/`).
+- [x] **Pages contenu bilingues** : `/a-propos`, `/sources` (attribution OSM + avertissement 15),
+      `/mentions-legales` (noindex), `/confidentialite` (RGPD). `PageShell` + prose inline.
+- [x] **Placeholders** « en construction » : `/annuaire`, `/pharmacies-de-garde`, `/conseils`,
+      `/contact` (mailto) — nav + footer sans 404. `Placeholder` composant.
+- [x] **SEO / PWA metadata** : `src/app/{manifest,robots,sitemap}.ts` (statiques),
+      `public/logo.png` (1024²), `icons.apple` dans la metadata, alternates hreflang.
+- [x] Entités `&apos;`/`&quot;` → caractères typographiques (’ « »).
+- [x] **Vérifié** : build (26 routes, tout en SSG sauf catch-all), typecheck/lint/format,
+      sorties `/robots.txt` `/sitemap.xml` `/manifest.webmanifest` contrôlées. **CI verte (PR #3)**.
 
 ## Reste — jalon 1
 
 1. Page **Annuaire** : `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres
    - recherche plein texte + fiche détaillée + carte MapLibre + « autour de moi » (PostGIS).
+     **Bloqué** tant que la base Supabase n'existe pas.
 2. Câbler Urgences sur `emergency_contacts` (DB) avec fallback statique quand pas de DB.
 3. shadcn/ui (init), composants `Map`, `SearchBar`, `ProCard`.
-4. PWA (`next-pwa` compatible Next 16), `manifest.ts`, `sitemap.ts`, `robots.ts`.
-5. Pages légales : `/mentions-legales`, `/confidentialite`, `/sources`, `/contact`, `/a-propos`
-   (footer y pointe déjà → 404 pour l'instant).
-6. JSON-LD (`Pharmacy`, `Hospital`, `MedicalBusiness`) sur les fiches + page Urgences.
-7. Vrai menu burger mobile (client component).
+4. **Service Worker** offline (hand-roll dans `public/`, next-pwa incompatible Turbopack) +
+   icônes maskables PWA propres.
+5. JSON-LD (`Pharmacy`, `Hospital`, `MedicalBusiness`) sur les fiches + page Urgences.
+6. Vrai menu burger mobile (client component).
+7. Compléter identité éditeur dans `/mentions-legales`.
 
 ## Notes / points d'attention
 
 - **Next.js 16** : lire `node_modules/next/dist/docs/` avant d'écrire du code Next
   (imposé par `AGENTS.md`, importé par `CLAUDE.md`). Layouts typés : `LayoutProps<"/">`.
   `cookies()` est **async**.
+- **next-intl** : `setRequestLocale` est marqué `@deprecated` (migrer vers `next/root-params`)
+  mais reste fonctionnel — ce n'est qu'un _hint_ TS, la CI passe. Migration à faire dans une
+  passe dédiée. Ne pas l'enlever sans vérifier que les pages restent en SSG.
+- i18n : `generateStaticParams` factorisé dans `src/lib/i18n-page.ts` (`generateLocaleParams`).
 - Migration SQL 0001 pas encore appliquée sur une vraie base → à tester au 1er déploiement.
 - `shifts` = 1 table (`kind` = pharmacie|medecin|mmg), pas 2 tables comme le plan initial.
 - Contraste : `soleil #FFD700` sur blanc échoue WCAG AA → fonds/icônes only, jamais texte.
