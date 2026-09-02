@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "title": "Madinina Santé — On-call pharmacies, doctors and emergencies in Martinique",
+    "description": "Quickly find on-call pharmacies, doctors, healthcare facilities and emergency numbers in Martinique. Free, for residents and visitors."
+  },
+  "nav": {
+    "home": "Home",
+    "annuaire": "Directory",
+    "pharmaciesDeGarde": "On-call pharmacies",
+    "urgences": "Emergencies",
+    "conseils": "Health tips",
+    "aPropos": "About"
+  },
+  "header": {
+    "emergencyBanner": "Emergencies: <b>Ambulance 15</b> · Fire 18 · Police 17 · EU 112",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "disclaimer": "In a life-threatening emergency, call 15 (ambulance) or 112. The information on this site does not replace medical advice.",
+    "sources": "Data sources",
+    "legal": "Legal notice",
+    "privacy": "Privacy",
+    "contact": "Contact",
+    "attribution": "Map data © OpenStreetMap contributors. Directory based on public data (data.gouv.fr, FINESS)."
+  },
+  "home": {
+    "region": "Martinique · 972",
+    "title": "Your health in Martinique, made simple",
+    "subtitle": "Real-time on-call pharmacies, doctors, healthcare facilities and emergency numbers — for residents and visitors.",
+    "quick": {
+      "pharmacies": "On-call pharmacies",
+      "pharmaciesDesc": "Open now, near you",
+      "urgences": "Emergencies",
+      "urgencesDesc": "Useful numbers and hospitals",
+      "annuaire": "Health directory",
+      "annuaireDesc": "Doctors, practices, facilities"
+    },
+    "wip": "Work in progress — milestone 1 (MVP)."
+  },
+  "urgences": {
+    "title": "Emergency numbers",
+    "intro": "In a life-threatening emergency, call 15 or 112 immediately. Do not travel without medical advice.",
+    "nationalHeading": "National numbers",
+    "localHeading": "Useful numbers in Martinique",
+    "hospitalsHeading": "Hospitals and clinics with emergency care",
+    "call": "Call {phone}",
+    "categories": {
+      "medical": "Medical",
+      "secours": "Rescue",
+      "securite": "Safety",
+      "social": "Support & social"
+    }
+  },
+  "placeholder": {
+    "badge": "Under construction",
+    "body": "This section is coming soon. In the meantime, check the emergency numbers and the directory.",
+    "annuaireTitle": "Health directory",
+    "pharmaciesTitle": "On-call pharmacies",
+    "conseilsTitle": "Health tips"
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "A question, an error to report, a partnership proposal?",
+    "emailIntro": "Write to us at",
+    "email": "contact@madinina-sante.example"
+  },
+  "langSwitcher": {
+    "label": "Language",
+    "fr": "Français",
+    "en": "English"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page does not exist or has been moved.",
+    "back": "Back to home"
+  }
+}

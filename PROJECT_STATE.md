@@ -1,7 +1,8 @@
 # PROJECT_STATE — Madinina Santé
 
 > État vivant du projet. Mis à jour à chaque fin de session.
-> Dernière mise à jour : 2026-08-31 — jalon 0 **terminé** (branche `feat/jalon-0-suite`).
+> Dernière mise à jour : 2026-09-02 — jalon 1 **en cours** (branche `feat/jalon-1-mvp`) : i18n + page Urgences faits.
+> Jalon 0 mergé dans `main` (PR #2, `bbddfb8`).
 
 ## Le projet en une phrase
 
@@ -19,7 +20,7 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
 
 - Next.js **16.3.3** (App Router, Turbopack) + React 19 + TS
 - Tailwind CSS v4 — tokens charte dans `src/app/globals.css`
-- Supabase (Postgres/PostGIS/Auth/RLS) + Drizzle ORM — **schéma écrit, base pas encore créée**
+- Supabase (Postgres/PostGIS/Auth/RLS) + Drizzle ORM — **base créée, migration + seed appliqués**
 - Déps : `@supabase/{supabase-js,ssr}`, `drizzle-orm`, `postgres`, `zod`, `clsx`,
   `tailwind-merge`, `class-variance-authority`, `lucide-react`, `next-intl`, `server-only`
   ; dev : `prettier` (+ plugin tailwind), `drizzle-kit`, `tsx`, `dotenv`, `@types/pg`
@@ -49,33 +50,68 @@ Roadmap : `docs/roadmap.md` (+ plan détaillé dans `~/.claude/plans/…snoopy-c
 - [x] `README.md` réécrit ; `docs/{README,decisions,roadmap,data-strategy}.md`.
 - [x] **Vérifié** : `pnpm build` OK (`/` + `/_not-found` prérendus statiques), `typecheck` OK,
       `lint` OK, `format:check` OK, smoke test `next start` (home + 404) OK.
+- [x] CI verte après 2 correctifs : `PROJECT_STATE.md` formaté prettier ;
+      `typecheck` = `next typegen && tsc --noEmit` (type global `LayoutProps` sinon absent en CI).
 
-## Reste à faire — jalon 0 (hors code, avec l'utilisateur)
+## Infra (hors code)
 
-- [ ] Créer le projet Supabase réel, remplir `.env.local`, appliquer
-      `supabase/migrations/0001_init.sql` + `supabase/seed.sql` (SQL editor ou `supabase` CLI).
-- [ ] Créer le repo GitHub distant + brancher **Cloudflare Pages** (build `pnpm build`,
-      sortie `.next`, var `NEXT_PUBLIC_SITE_URL`), obtenir l'URL `*.pages.dev`.
-- [ ] Ajouter `logo_madinina_sante.png` (dans `docs/legacy/.../`) → `public/` + favicons/icônes PWA.
+- [x] Projet **Supabase** créé, `.env` renseigné (2026-09-02). Migration `0001_init.sql` + `seed.sql` **appliquées** via le session pooler (5432). 6 tables + PostGIS/pg_trgm,
+      10 numéros d'urgence. Lecture runtime OK via pooler transaction (6543, `prepare:false`).
+- [x] `logo_madinina_sante.png` → `public/logo.png`.
+- [ ] **Vercel** : importer le repo, coller les 5 env vars (dont `DATABASE_URL` en 6543),
+      déployer, remettre l'URL réelle dans `NEXT_PUBLIC_SITE_URL`. Voir README §Déploiement.
+      → **Cloudflare abandonné** pour la v1 (Pages ≠ Next 16 SSR ; Workers = adapter OpenNext + refacto DB). Cf. `docs/decisions.md` T6.
 
-## Prochaine session — jalon 1 (MVP consultable)
+## Fait — jalon 1 (en cours, branche `feat/jalon-1-mvp`)
 
-1. i18n : `next-intl` (FR défaut + EN), restructurer sous `src/app/[locale]/`, `messages/`.
-2. Page **Urgences** (lecture `emergency_contacts`, fallback statique) + disclaimer.
-3. Page **Annuaire** : script `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres
-   - recherche plein texte + fiche détaillée + carte MapLibre + « autour de moi » (PostGIS).
-4. shadcn/ui (init), composants `Map`, `SearchBar`, `ProCard`.
-5. PWA (`@ducanh2912/next-pwa` ou équivalent Next 16), `manifest.ts`, `sitemap.ts`, `robots.ts`.
-6. Pages légales : `/mentions-legales`, `/confidentialite`, `/sources`, `/contact`, `/a-propos`.
-7. JSON-LD (`Pharmacy`, `Hospital`, `MedicalBusiness`) sur les fiches.
+- [x] `src/lib/env.ts` : `z.string().url()` (déprécié zod 4) → `z.url()`.
+- [x] **i18n next-intl** (FR défaut, EN sous `/en`, `localePrefix: as-needed`) :
+      `src/i18n/{routing,navigation,request}.ts`, `src/proxy.ts` (Next 16 : `proxy` pas `middleware`),
+      plugin dans `next.config.ts`, `messages/{fr,en}.json`.
+- [x] Routes déplacées sous `src/app/[locale]/` : root `layout.tsx` = pass-through,
+      `[locale]/layout.tsx` = `<html lang>` + polices + `NextIntlClientProvider` +
+      `generateStaticParams` + `generateMetadata` localisée + `setRequestLocale`.
+      `[locale]/not-found.tsx`, `[locale]/[...rest]/page.tsx` (catch-all → 404),
+      root `not-found.tsx` (html/body complet).
+- [x] `SiteHeader`/`SiteFooter` traduits ; `LangSwitcher` (client) ;
+      `src/lib/navigation.ts` → `mainNav` avec `labelKey`.
+- [x] **Page Urgences** `/urgences` : `src/lib/emergency-data.ts` (10 numéros + 4 hôpitaux,
+      FR/EN), liens `tel:`, groupée national/local/hôpitaux, metadata.
+- [x] **Pages contenu bilingues** : `/a-propos`, `/sources` (attribution OSM + avertissement 15),
+      `/mentions-legales` (noindex), `/confidentialite` (RGPD). `PageShell` + prose inline.
+- [x] **Placeholders** « en construction » : `/annuaire`, `/pharmacies-de-garde`, `/conseils`,
+      `/contact` (mailto) — nav + footer sans 404. `Placeholder` composant.
+- [x] **SEO / PWA metadata** : `src/app/{manifest,robots,sitemap}.ts` (statiques),
+      `public/logo.png` (1024²), `icons.apple` dans la metadata, alternates hreflang.
+- [x] Entités `&apos;`/`&quot;` → caractères typographiques (’ « »).
+- [x] **Vérifié** : build (26 routes, tout en SSG sauf catch-all), typecheck/lint/format,
+      sorties `/robots.txt` `/sitemap.xml` `/manifest.webmanifest` contrôlées. **CI verte (PR #3)**.
+
+## Reste — jalon 1
+
+1. Page **Annuaire** : `scripts/import-datagouv.ts` + `import-osm.ts`, liste + filtres,
+   recherche plein texte, fiche détaillée, carte MapLibre, « autour de moi » (PostGIS).
+   DB prête → débloqué.
+2. Câbler Urgences sur `emergency_contacts` (DB) avec fallback statique quand pas de DB.
+3. shadcn/ui (init), composants `Map`, `SearchBar`, `ProCard`.
+4. **Service Worker** offline (hand-roll dans `public/`, next-pwa incompatible Turbopack) +
+   icônes maskables PWA propres.
+5. JSON-LD (`Pharmacy`, `Hospital`, `MedicalBusiness`) sur les fiches + page Urgences.
+6. Vrai menu burger mobile (client component).
+7. Compléter identité éditeur dans `/mentions-legales`.
 
 ## Notes / points d'attention
 
 - **Next.js 16** : lire `node_modules/next/dist/docs/` avant d'écrire du code Next
   (imposé par `AGENTS.md`, importé par `CLAUDE.md`). Layouts typés : `LayoutProps<"/">`.
   `cookies()` est **async**.
-- Migration SQL 0001 pas encore appliquée sur une vraie base → à tester au 1er déploiement.
+- **next-intl** : `setRequestLocale` est marqué `@deprecated` (migrer vers `next/root-params`)
+  mais reste fonctionnel — ce n'est qu'un _hint_ TS, la CI passe. Migration à faire dans une
+  passe dédiée. Ne pas l'enlever sans vérifier que les pages restent en SSG.
+- i18n : `generateStaticParams` factorisé dans `src/lib/i18n-page.ts` (`generateLocaleParams`).
 - `shifts` = 1 table (`kind` = pharmacie|medecin|mmg), pas 2 tables comme le plan initial.
+- Supabase région `us-east-1` (le projet a été créé là). `DATABASE_URL` = pooler
+  transaction 6543 ; pour le DDL, échanger `:6543`→`:5432` (session pooler).
 - Contraste : `soleil #FFD700` sur blanc échoue WCAG AA → fonds/icônes only, jamais texte.
 - Attribution **© OpenStreetMap** déjà dans le footer — garder dès l'import OSM + page `/sources`.
 - Header : menu mobile = simple wrap pour l'instant ; vrai burger (client component) au jalon 1.

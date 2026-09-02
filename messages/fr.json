@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "title": "Madinina Santé — Pharmacies de garde, médecins et urgences en Martinique",
+    "description": "Trouvez rapidement les pharmacies de garde, médecins, établissements de santé et numéros d'urgence en Martinique. Gratuit, pour les habitants et les visiteurs."
+  },
+  "nav": {
+    "home": "Accueil",
+    "annuaire": "Annuaire",
+    "pharmaciesDeGarde": "Pharmacies de garde",
+    "urgences": "Urgences",
+    "conseils": "Conseils santé",
+    "aPropos": "À propos"
+  },
+  "header": {
+    "emergencyBanner": "Urgences : <b>SAMU 15</b> · Pompiers 18 · Police 17 · Europe 112",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "footer": {
+    "disclaimer": "En cas d'urgence vitale, appelez le 15 (SAMU) ou le 112. Les informations de ce site ne remplacent pas un avis médical.",
+    "sources": "Sources des données",
+    "legal": "Mentions légales",
+    "privacy": "Confidentialité",
+    "contact": "Contact",
+    "attribution": "Données cartographiques © les contributeurs OpenStreetMap. Annuaire issu des données publiques (data.gouv.fr, FINESS)."
+  },
+  "home": {
+    "region": "Martinique · 972",
+    "title": "Votre santé en Martinique, simplifiée",
+    "subtitle": "Pharmacies de garde en temps réel, médecins, établissements de santé et numéros d'urgence — pour les habitants et les visiteurs.",
+    "quick": {
+      "pharmacies": "Pharmacies de garde",
+      "pharmaciesDesc": "Ouvertes maintenant, près de vous",
+      "urgences": "Urgences",
+      "urgencesDesc": "Numéros utiles et hôpitaux",
+      "annuaire": "Annuaire santé",
+      "annuaireDesc": "Médecins, cabinets, établissements"
+    },
+    "wip": "Projet en construction — jalon 1 (MVP)."
+  },
+  "urgences": {
+    "title": "Numéros d'urgence",
+    "intro": "En cas d'urgence vitale, appelez immédiatement le 15 ou le 112. Ne vous déplacez pas sans avis médical.",
+    "nationalHeading": "Numéros nationaux",
+    "localHeading": "Numéros utiles en Martinique",
+    "hospitalsHeading": "Hôpitaux et cliniques avec urgences",
+    "call": "Appeler {phone}",
+    "categories": {
+      "medical": "Médical",
+      "secours": "Secours",
+      "securite": "Sécurité",
+      "social": "Écoute et social"
+    }
+  },
+  "placeholder": {
+    "badge": "En construction",
+    "body": "Cette section arrive bientôt. En attendant, consultez les numéros d'urgence et l'annuaire.",
+    "annuaireTitle": "Annuaire santé",
+    "pharmaciesTitle": "Pharmacies de garde",
+    "conseilsTitle": "Conseils santé"
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Une question, une erreur à signaler, une proposition de partenariat ?",
+    "emailIntro": "Écrivez-nous à",
+    "email": "contact@madinina-sante.example"
+  },
+  "langSwitcher": {
+    "label": "Langue",
+    "fr": "Français",
+    "en": "English"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "Cette page n'existe pas ou a été déplacée.",
+    "back": "Retour à l'accueil"
+  }
+}
